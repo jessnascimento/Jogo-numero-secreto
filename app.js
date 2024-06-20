@@ -1,3 +1,5 @@
+let ListaNumerosSorteados = [];
+let numeroLimite = 10;
 let numeroSecreto = gerarNumeroAleatorio();
 let tentativas = 1;
 
@@ -29,13 +31,26 @@ function verificarChute(){
             exibirTextoTela('h1', 'Tente novamente!');
             exibirTextoTela('p', 'Chute menor que numero secreto.');
         }
-        tentativas++
+        tentativas++;
         limparCampo();
     }
 }
 
 function gerarNumeroAleatorio(){
-    return parseInt(Math.random() * 10 + 1);
+    let numeroEscolhido = parseInt(Math.random() * numeroLimite + 1);
+    let quantidadeNumerosLista = ListaNumerosSorteados.length;
+
+    if (quantidadeNumerosLista == numeroLimite){
+        ListaNumerosSorteados = [];
+    }
+
+    if(ListaNumerosSorteados.includes(numeroEscolhido)){
+        return gerarNumeroAleatorio();
+    }else{
+        ListaNumerosSorteados.push(numeroEscolhido);
+        console.log(ListaNumerosSorteados);
+        return numeroEscolhido;
+    }
 }
 
 function limparCampo(){
